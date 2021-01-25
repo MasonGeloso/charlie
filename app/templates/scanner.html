@@ -1,0 +1,126 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+
+
+
+
+<div class="container-fluid m-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg">
+
+                <div class="card-header">
+                    <h1>Scanner
+                        <div style="font-size: initial; display: flex;" class="float-right">
+                            <label class="form-check-label mr-2">Decline</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="action" checked>
+                                <label class="form-check-label">Approve</label>
+                        </div>
+                    </h1>
+
+                </div>
+
+
+                <div class="card-body">
+                    <textarea tabindex="-1" rows="5" class="form-control form-control-lg" placeholder="Barcode" id="scanner"></textarea>
+                </div>
+
+                <div class="card-footer">
+                    <span id="loading_status" class=""></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+// Reset Text Area
+$('#scanner').click(function(){
+	$(this).val('');
+});
+
+
+var typingTimer;
+var doneTypingInterval = 1000;
+var $input = $('#scanner');
+
+//on keyup, start the countdown
+$input.on('keyup', function () {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(scan_input, doneTypingInterval);
+});
+
+$input.on('keydown', function () {
+    clearTimeout(typingTimer);
+});
+
+// Update Item Information Section
+function scan_input () {
+
+    $('#loading_status')
+        .removeClass('bg-success')
+        .removeClass('bg-danger')
+        .addClass($('#action').is(':checked') ? 'badge bg-success' : 'badge bg-danger');
+
+    $('#loading_status')
+        .text(`Marking ${$('#action').is(':checked') ? 'Approved' : 'Declined'}...`);
+
+    $.ajax({
+        url: `/scanner?user=${localStorage.getItem('username')}`,
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            barcode: $('#scanner').val(),
+            status: $('#action').is(':checked') ? 'Approved' : 'Declined'
+        }),
+        success: (resp) => {
+
+            // parse possible results
+            console.log(resp)
+
+            $('#loading_status').text('Saved!');
+        },
+        error: (resp) => {
+            console.log(resp)
+            alert(`Failed to save item status due to: ${resp.responseText}`);
+            $('#loading_status')
+                .removeClass('bg-success')
+                .removeClass('bg-danger')
+                .addClass('bg-danger')
+                .text('Error!');
+        }
+    })
+
+};
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+
+<h1 class="display-4 text-center mt-5">All Items</h1>
+
+<div class="container-fluid">
+    <div class="row justify-content-center m-5">
+        {% for status, count in count.items() %}
+
+        <div class="col-md-3">
+            <div class="card shadow-lg">
+                <div class="card-body text-center">
+                    <h2>
+                        {{ count }}
+                    </h2>
+
+                    <p>{{ status }} items</p>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Catalog</th>
+            <th>Purchase Order</th>
+            <th>Lot ID</th>
+            <th>RGA</th>
+            <th>Status</th>
+            <th>Filename</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.catalog }}</td>
+            <td>{{ item.purchase_order }}</td>
+            <td>{{ item.lot_id }}</td>
+            <td>{{ item.rga }}</td>
+            <td>{{ item.status }}</td>
+            <td>{{ item.filename }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+{% endblock content %}

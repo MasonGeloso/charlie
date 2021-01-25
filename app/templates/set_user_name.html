@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+        <h1 class="display-4 text-center mb-5" id="currentUserName"></h1>
+
+        <div class="col-lg-8">
+            <label class="text-center">Set Username</label>
+            <input id="userNameInput" class="form-control text-center">
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    console.log(localStorage.getItem('username'))
+
+    if (localStorage.getItem('username')) {
+        $('#currentUserName').text(localStorage.getItem('username') + ' is your username');
+    } else {
+        $('#currentUserName').text('Username not set');
+    }
+
+
+    $('#userNameInput').keyup(function(){
+        localStorage.setItem('username', $('#userNameInput').val());
+        $('#currentUserName').text(localStorage.getItem('username') + ' is your username');
+    })
+</script>
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+
+
+
+{% block content %}
+
+
+
+
+
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center m-5">
+        <div class="col-lg text-center p-5">
+            <h1>{{ title }}</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center m-5">
+        <div class="col-lg text-center p-5 shadow-lg">
+            <form action="" method=post enctype=multipart/form-data class="">
+                <input type=file name=file><input type=submit value=Upload>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock content %}

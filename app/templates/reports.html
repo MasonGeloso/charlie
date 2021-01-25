@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+
+
+{% block content %}
+
+
+
+
+
+
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <h1 class="text-center display-4 mb-4">Reports</h1>
+            <ul class="list-group list-group-flush">
+                <li onclick="location.href='?master_report=true'" class="list-group-item grow">Master Report</li>
+                <li onclick="location.href='?approved_report=true'" class="list-group-item grow">Approved Items Report</li>
+                <li onclick="location.href='?declined_report=true'" class="list-group-item grow">Declined Items Report</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}
