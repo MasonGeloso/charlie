@@ -64,6 +64,8 @@ var $input = $('#scanner');
 
 $('#scanner').change(function(){
     scan_input();
+    $('#scanner').val('');
+    $('#scanner').focus();
 })
 
 // Update Item Information Section
