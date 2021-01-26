@@ -64,8 +64,6 @@ var $input = $('#scanner');
 
 $('#scanner').change(function(){
     scan_input();
-    $('#scanner').val('');
-    $('#scanner').focus();
 })
 
 // Update Item Information Section
@@ -105,6 +103,9 @@ function scan_input () {
                 .addClass('bg-danger')
                 .text('Error!');
         }
+    }).then(function(){
+        $('#scanner').val('');
+        $('#scanner').focus();
     })
 
 };
