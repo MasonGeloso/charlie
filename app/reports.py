@@ -26,6 +26,7 @@ def generate_report(report):
         worksheet.write(0, 6, 'GUI', bold)
         worksheet.write(0, 7, 'Status', bold)
         worksheet.write(0, 8, 'Last Activity', bold)
+        worksheet.write(0, 9, 'RGA', bold)
 
         for row, item in enumerate(ITEMS):
             row += 1
@@ -38,6 +39,7 @@ def generate_report(report):
             worksheet.write(row, 6, item.GUI)
             worksheet.write(row, 7, item.status)
             worksheet.write(row, 8, str(item.history[-1].get('text')) if item.history else '')
+            worksheet.write(row, 9, item.rga)
 
     if report == 'approved_report':
         worksheet = workbook.add_worksheet('Approved Items')
@@ -52,6 +54,7 @@ def generate_report(report):
         worksheet.write(0, 6, 'GUI', bold)
         worksheet.write(0, 7, 'Status', bold)
         worksheet.write(0, 8, 'Last Activity', bold)
+        worksheet.write(0, 9, 'RGA', bold)
 
         for row, item in enumerate([i for i in ITEMS if i.status == 'Approved']):
             row += 1
@@ -64,6 +67,7 @@ def generate_report(report):
             worksheet.write(row, 6, item.GUI)
             worksheet.write(row, 7, item.status)
             worksheet.write(row, 8, str(item.history[-1].get('text')) if item.history else '')
+            worksheet.write(row, 9, item.rga)
 
 
     if report == 'declined_report':
