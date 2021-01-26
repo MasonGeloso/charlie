@@ -53,14 +53,18 @@ var doneTypingInterval = 1000;
 var $input = $('#scanner');
 
 //on keyup, start the countdown
-$input.on('keyup', function () {
-    clearTimeout(typingTimer);
-    typingTimer = setTimeout(scan_input, doneTypingInterval);
-});
+// $input.on('keyup', function () {
+//     clearTimeout(typingTimer);
+//     typingTimer = setTimeout(scan_input, doneTypingInterval);
+// });
 
-$input.on('keydown', function () {
-    clearTimeout(typingTimer);
-});
+// $input.on('keydown', function () {
+//     clearTimeout(typingTimer);
+// });
+
+$('#scanner').change(function(){
+    scan_input();
+})
 
 // Update Item Information Section
 function scan_input () {
