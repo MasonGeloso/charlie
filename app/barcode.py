@@ -23,6 +23,8 @@ def parse(barcode):
 
     catalog = barcode[barcode.find('(D@11)')+6:barcode.find('(D@12)')]
 
+    catalog = catalog[:catalog.find(' ')]
+
 
     return {
         'GUI': GUI,
