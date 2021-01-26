@@ -81,10 +81,10 @@ def get_item(value, by='serial'):
             return i
 
 
-def get_non_serial_item(lot_id, catalog, create_overflow_item=True, user=None):
+def get_non_serial_item(lot_id, catalog, create_overflow_item=True, user=None, dup_override=False):
 
     for item in ITEMS:
-        if item.serial:
+        if item.serial and not dup_override:
             continue
 
         if item.lot_id == lot_id and item.catalog == catalog and item.source == 'RGA':

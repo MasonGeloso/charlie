@@ -69,6 +69,7 @@ def scanner():
         barcode_data = parse(data.get('barcode'))
         status = data.get('status')
         user = request.args.get('user')
+        dup_override = True if request.args.get('dupOverride') == 'true' else False
 
         # Data is incomplete
         if not barcode_data or not status:
@@ -77,14 +78,14 @@ def scanner():
         # Check for duplicates by serial
         possible_dup = get_item(barcode_data.get('serial'))
 
-        if possible_dup:
+        if possible_dup and dup_override != True:
             return f'Duplicate detected: {barcode_data.get("serial")}', 400
 
         # Check if items remaining
         i = get_non_serial_item(
             barcode_data.get('lot_id'),
             barcode_data.get('catalog'),
-            user=user
+            user=user, dup_override=dup_override
         )
 
         # Set attribute

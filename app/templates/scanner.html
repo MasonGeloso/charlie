@@ -30,6 +30,8 @@
 
                 <div class="card-footer">
                     <span id="loading_status" class=""></span>
+                    <input class="form-check-input" type="checkbox" id="dupOverride">
+                    <label class="form-check-label">Duplicate Override</label>
                 </div>
             </div>
         </div>
@@ -71,8 +73,10 @@ function scan_input () {
     $('#loading_status')
         .text(`Marking ${$('#action').is(':checked') ? 'Approved' : 'Declined'}...`);
 
+    const dupOverride = $('#dupOverride').is(':checked') ? 'true' : 'false';
+
     $.ajax({
-        url: `/scanner?user=${localStorage.getItem('username')}`,
+        url: `/scanner?user=${localStorage.getItem('username')}&&dupOverride=${dupOverride}`,
         type: 'PUT',
         contentType: 'application/json',
         data: JSON.stringify({
